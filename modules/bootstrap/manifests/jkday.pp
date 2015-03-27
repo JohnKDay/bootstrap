@@ -1,6 +1,6 @@
-# == Class: bootstrap
+# == Class: bootstrap::jkday
 #
-# Full description of class bootstrap here.
+# Full description
 #
 # === Parameters
 #
@@ -23,7 +23,7 @@
 #
 # === Examples
 #
-#  class { bootstrap:
+#  class { example:
 #    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ]
 #  }
 #
@@ -35,13 +35,29 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
-class bootstrap {
+class bootstrap::jkday {
   
-  include bootstrap::jkday
+  $jkday_key = 'put you key here'
 
-  class { '::ntp':
-    servers  => [ 'ntp1.corp.com', 'ntp2.corp.com' ],
-    restrict => ['127.0.0.1'],
+  user { 'jkday':
+    ensure           => 'present',
+    gid              => '666',
+    home             => '/home/jkday',
+    password         => 'iluvcatsndolphins',
+    password_max_age => '99999',
+    password_min_age => '0',
+    shell            => '/bin/bash',
+    uid              => '666',
+    managehome       => true,
+    forcelocal       => true,
+  }
+
+  ssh_authorized_key { 'jkday':
+    ensure    => "present",
+    require => [ User["jkday"] ],
+    key => $jkday_key,
+    type => "ssh-rsa",
+    user => "jkday"
   }
 
 }
