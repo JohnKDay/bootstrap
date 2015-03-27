@@ -1,6 +1,6 @@
-# == Class: bootstrap
+# == Class: bootstrap::repos
 #
-# Full description of class bootstrap here.
+# Full description
 #
 # === Parameters
 #
@@ -23,7 +23,7 @@
 #
 # === Examples
 #
-#  class { bootstrap:
+#  class { example:
 #    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ]
 #  }
 #
@@ -35,14 +35,33 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
-class bootstrap {
+class bootstrap::jkday {
   
-  include bootstrap::jkday
-  include bootstrap::repos
-
-  class { '::ntp':
-    servers  => [ 'ntp1.corp.com', 'ntp2.corp.com' ],
-    restrict => ['127.0.0.1'],
+  yumrepo { 'puppetlabs-products':
+    ensure   => 'present',
+    baseurl  => 'http://yum.puppetlabs.com/el/6/products/$basearch',
+    descr    => 'Puppet Labs Products El 6 - $basearch',
+    enabled  => '1',
+    gpgcheck => '0',
   }
+
+  yumrepo { 'puppetlabs-deps':
+    ensure   => 'present',
+    baseurl  => 'http://yum.puppetlabs.com/el/6/dependencies/$basearch',
+    descr    => 'Puppet Labs Dependencies El 6 - $basearch',
+    enabled  => '1',
+    gpgcheck => '0',
+  }
+
+  $puppet_pkgs = [ 'puppetlabs-release', 'puppet' ]
+
+  package { 'puppetlabs-release':
+    ensure  => 'latest',
+    require => [
+      Yumrepo['puppetlabs-products'],
+      Yumrepo['puppetlabs-deps'],
+    ],
+  }
+
 
 }
