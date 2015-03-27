@@ -39,16 +39,16 @@ class bootstrap::jkday {
   
   yumrepo { 'puppetlabs-products':
     ensure   => 'present',
-    baseurl  => 'http://yum.puppetlabs.com/el/6/products/$basearch',
-    descr    => 'Puppet Labs Products El 6 - $basearch',
+    baseurl  => "http://yum.puppetlabs.com/el/${operatingsystemmajrelease}/products/\$basearch",
+    descr    => "Puppet Labs Products El ${operatingsystemmajrelease} - \$basearch",
     enabled  => '1',
     gpgcheck => '0',
   }
 
   yumrepo { 'puppetlabs-deps':
     ensure   => 'present',
-    baseurl  => 'http://yum.puppetlabs.com/el/6/dependencies/$basearch',
-    descr    => 'Puppet Labs Dependencies El 6 - $basearch',
+    baseurl  => "http://yum.puppetlabs.com/el/${operatingsystemmajrelease}/dependencies/\$basearch",
+    descr    => "Puppet Labs Dependencies El ${operatingsystemmajrelease} - \$basearch",
     enabled  => '1',
     gpgcheck => '0',
   }
