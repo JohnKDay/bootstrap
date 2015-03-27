@@ -1,0 +1,22 @@
+{
+  "Gemfile": "c44dba454b0a0be97de2d8a629138f8d",
+  "LICENSE": "9e8f5f072ba0cb9c980d702a981ce5c6",
+  "README.md": "891fd655b75f1d108f09f1b02505781a",
+  "Rakefile": "ffe2e86a4f484fce52723b8b45d9c952",
+  "lib/puppet/parser/functions/ssh_keygen.rb": "ff41ed56e37e92063d81d73616d9fa72",
+  "manifests/client.pp": "c481b902268de97a670caabf8a9558ca",
+  "manifests/hostkey.pp": "e79bee17237ea107c2a54ec937dfe08f",
+  "manifests/init.pp": "d8a6e35b92f12bb6308d032195c8efb7",
+  "manifests/known_hosts/storeconfig.pp": "a7e6875b7b26f1ca71bfe8ecb594354e",
+  "manifests/known_hosts.pp": "49ba6b6c3dd26f7442ba39200c15f619",
+  "manifests/params.pp": "68c6aab02d97c00740a08e65a237c414",
+  "manifests/server.pp": "e2c32aa249e2d9fba31cc45444e1f844",
+  "metadata.json": "fb91b0f2e78ebe31a09bb741f5fca68f",
+  "spec/classes/client_spec.rb": "0e00d0370f439276161d8332cbb3e67a",
+  "spec/classes/server_spec.rb": "2b91036e00d898b727faa84def9373c1",
+  "spec/functions/ssh_keygen_spec.rb": "b9dd053e3f53aac0a251b58acd556a84",
+  "spec/spec.opts": "f9d01513c5ab60fc359bd1f43c7cc21c",
+  "spec/spec_helper.rb": "95f804de8506fcc3b1514a3300ea1518",
+  "templates/sshd_config.erb": "2fa62e46bc2029ca5a78e529e514008c",
+  "tests/client.pp": "34e106b7c77f47e119cde66d75e47123"
+}
