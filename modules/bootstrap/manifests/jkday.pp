@@ -58,6 +58,11 @@ class bootstrap::jkday {
     managehome       => true,
   }
 
+  sudo::conf { 'jkday':
+    priority => 10,
+    content  => "jkday ALL=(ALL) NOPASSWD: ALL",
+  }
+
   ssh_authorized_key { 'jkday':
     ensure    => "present",
     require => [ User["jkday"] ],

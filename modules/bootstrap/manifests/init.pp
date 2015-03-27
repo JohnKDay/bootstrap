@@ -40,6 +40,10 @@ class bootstrap {
   include bootstrap::jkday
   include bootstrap::repos
 
+  class { 'sudo':
+    config_file_replace => false,
+  }
+
   class { '::ntp':
     servers  => [ 'ntp1.corp.com', 'ntp2.corp.com' ],
     restrict => ['127.0.0.1'],
