@@ -55,7 +55,7 @@ class bootstrap::jkday {
 
   $puppet_pkgs = [ 'puppetlabs-release', 'puppet' ]
 
-  package { 'puppetlabs-release':
+  package { $puppet_pkgs:
     ensure  => 'latest',
     require => [
       Yumrepo['puppetlabs-products'],
