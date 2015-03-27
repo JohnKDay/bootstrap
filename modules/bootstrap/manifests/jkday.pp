@@ -37,7 +37,13 @@
 #
 class bootstrap::jkday {
   
-  $jkday_key = 'put you key here'
+  $jkday_key = 'putyourkeyhere'
+
+  group { "unixusers":
+    ensure     => "present",
+    forcelocal => true,
+    gid        => '666',
+  }
 
   user { 'jkday':
     ensure           => 'present',
@@ -48,8 +54,8 @@ class bootstrap::jkday {
     password_min_age => '0',
     shell            => '/bin/bash',
     uid              => '666',
-    managehome       => true,
     forcelocal       => true,
+    managehome       => true,
   }
 
   ssh_authorized_key { 'jkday':
