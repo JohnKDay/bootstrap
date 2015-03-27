@@ -36,6 +36,10 @@
 # Copyright 2011 Your name here, unless otherwise noted.
 #
 class bootstrap {
-
+  
+  class { '::ntp':
+    servers  => [ 'ntp1.corp.com', 'ntp2.corp.com' ],
+    restrict => ['127.0.0.1'],
+  }
 
 }
