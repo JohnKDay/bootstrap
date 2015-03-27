@@ -41,6 +41,7 @@ class bootstrap {
   include bootstrap::repos
 
   class { 'sudo':
+    purge               => false,
     config_file_replace => false,
   }
 
