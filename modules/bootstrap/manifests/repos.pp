@@ -35,7 +35,7 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
-class bootstrap::jkday {
+class bootstrap::repos {
   
   yumrepo { 'puppetlabs-products':
     ensure   => 'present',
