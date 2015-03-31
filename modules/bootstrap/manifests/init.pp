@@ -37,8 +37,9 @@
 #
 class bootstrap {
   
-  include bootstrap::jkday
-  include bootstrap::repos
+  include ::bootstrap::jkday
+  include ::bootstrap::repos
+  include ::tmux
 
   class { 'sudo':
     purge               => false,
