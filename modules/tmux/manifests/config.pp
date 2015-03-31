@@ -14,7 +14,7 @@ class vas::config (
   $package_name     = $tmux::params::package_name,) inherits tmux::params {
   validate_string($package_name)
 
-  file { '/etc/tmux/tmux.conf':
+  file { '/etc/tmux.conf':
     ensure => 'present',
     mode   => '640',
     owner  => 'root',
