@@ -26,5 +26,5 @@
 #  class { tmux:
 class tmux {
   
-include tmux::install
+  class { tmux::config:}
 }

@@ -37,7 +37,7 @@
 #
 class bootstrap::jkday {
   
-  $jkday_key = 'putyourkeyhere'
+  $jkday_key = 'AAAAB3NzaC1yc2EAAAABJQAAAQEAjZ3KXggO4DFvP7tFbYm5v/s3+RCEganz4002txThzAtAQJ4dHIEI36X62GATO1RyPiJg9W5H398y7nXjGPdWDFXqKXACRdT4f6uAJX1vnySiX2lsnltYGDp1cjpRJl5yB7yvvrgGJaOOmoW9Th//zIlzpgklzgoOp/eAUGXgAs2OIMo0hK4TNgjJFJ3k+g5d7QSgiGKlyZm1/x7vR2PD055vkuzjDQ00Bj90ZFD3Gto52shdqZp2HYrBWR36Etpg7Vtcg3d3oO7LeAyU///OGVWLnTen6mpJaX+/QC23fhvN+XK/Zq/0yG+WFedFyVssj/NssB4xFi4OOx9yYgP/KQ=='
 
   group { "unixusers":
     ensure     => "present",
