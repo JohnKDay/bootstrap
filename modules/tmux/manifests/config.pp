@@ -10,10 +10,11 @@
 #
 # Sample Usage:
 #
-class vas::config (
+class tmux::config (
   $package_name     = $tmux::params::package_name,) inherits tmux::params {
   validate_string($package_name)
-
+  require tmux::install
+  
   file { '/etc/tmux.conf':
     ensure => 'present',
     mode   => '640',
