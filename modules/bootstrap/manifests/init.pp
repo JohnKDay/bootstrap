@@ -55,5 +55,8 @@ class bootstrap {
     mode => 'disabled',
   }
 
+  systemctl {'firewalld':
+    command => 'diable',
+    }
 
 }
