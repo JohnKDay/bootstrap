@@ -12,5 +12,5 @@
 #
 class bootstrap::packages (
   $packagelist = $::bootstrap::params::packagelist) inherits ::bootstrap::params {
-  package { $packagelist: ensure => 'isntalled' }
+  package { $packagelist: ensure => 'installed' }
 }
