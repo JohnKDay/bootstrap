@@ -56,8 +56,9 @@ class bootstrap {
   }
 
 
-   systemctl {'firewalld':
-    command => 'disable',
+   service {'firewalld':
+    ensure => 'stopped',
+    enable => 'false',
     }
 
 }
