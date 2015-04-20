@@ -15,7 +15,7 @@
 # 'jeff1.example.com']
 #}
 
-class bootstrap::params {
+class ::bootstrap::params {
   $ntpservers = [
     'asdf.ntp.com',
     'zxcv.ntp.com']
