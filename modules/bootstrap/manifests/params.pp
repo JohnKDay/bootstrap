@@ -36,6 +36,10 @@
 # Copyright 2011 Your name here, unless otherwise noted.
 #
 class bootstrap::params {
+  $packagelist  = [
+    'gcc',
+    'bind-utils',
+    'nc']
   $ntpservers   = [
     'ntp1.ntp.com',
     'ntp2.ntp.com']

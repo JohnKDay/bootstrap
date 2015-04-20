@@ -1,6 +1,6 @@
-# == Class: bootstrap
+# == Class: bootstrap::yum
 #
-# Full description of class bootstrap here.
+# Full description
 #
 # === Parameters
 #
@@ -23,7 +23,7 @@
 #
 # === Examples
 #
-#  class { bootstrap:
+#  class { example:
 #    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ]
 #  }
 #
@@ -35,32 +35,14 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
-class bootstrap (
-  $ntpservers   = $::bootstrap::params::ntpservers,
-  $ntprestrict  = $::bootstrap::params::ntprestrict,
-  $selinux_mode = $::bootstrap::params::selinux_mode) inherits ::bootstrap::params {
-  include ::bootstrap::jkday
-  include ::bootstrap::repos
-  include ::bootstrap::packages
-  include ::tmux
-
-  class { 'sudo':
-    purge               => false,
-    config_file_replace => false,
+class bootstrap::update {
+  if $osfamily == 'RedHat' {
+    exec { 'yum_update':
+      command => 'yum -y update',
+      path    => '/bin:/usr/bin',
+      unless  => 'yum check-update',
+      # No timeout is '0' and '1200 is 20 minutes
+      timeout => '1200',
+    }
   }
-
-  class { '::ntp':
-    servers  => $ntpservers,
-    restrict => $ntprestrict,
-  }
-
-  class { '::selinux':
-    mode => $selinux_mode,
-  }
-
-  service { 'firewalld':
-    ensure => 'stopped',
-    enable => false,
-  }
-
 }
