@@ -35,31 +35,10 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
-class bootstrap (
-  $ntpservers   = $::bootstrap::params::nameservers,
-  $ntprestrict  = $::bootstrap::params::ntprestrict,
-  $selinux_mode = $::bootstrap::params::selinux_mode) {
-  include ::bootstrap::jkday
-  include ::bootstrap::repos
-  include ::tmux
-
-  class { 'sudo':
-    purge               => false,
-    config_file_replace => false,
-  }
-
-  class { '::ntp':
-    servers  => $ntpservers,
-    restrict => $ntprestrict,
-  }
-
-  class { '::selinux':
-    mode => $selinux_mode,
-  }
-
-  service { 'firewalld':
-    ensure => 'stopped',
-    enable => false,
-  }
-
+class ::bootstrap::params {
+  $ntpservers   = [
+    'ntp1.ntp.com',
+    'ntp2.ntp.com']
+  $ntprestrict  = '127.0.0.1'
+  $selinux_mode = 'disabled'
 }
