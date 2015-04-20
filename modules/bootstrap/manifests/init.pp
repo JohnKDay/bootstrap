@@ -42,6 +42,7 @@ class bootstrap (
   include ::bootstrap::jkday
   include ::bootstrap::repos
   include ::bootstrap::packages
+  include ::bootstrap::update
   include ::tmux
 
   class { 'sudo':
