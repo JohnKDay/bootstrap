@@ -58,7 +58,7 @@ class bootstrap {
 
    service {'firewalld':
     ensure => 'stopped',
-    enable => 'false',
+    enable => false,
     }
 
 }
