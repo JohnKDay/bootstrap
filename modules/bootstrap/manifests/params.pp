@@ -48,7 +48,7 @@ class bootstrap::params {
     'tree',
     'sysstat',
     'bind-utils',
-    'nc']
+    'nmap-ncat']
   $ntpservers   = [
     'ntp1.ntp.com',
     'ntp2.ntp.com']
