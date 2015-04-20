@@ -38,7 +38,7 @@
 class bootstrap (
   $ntpservers   = $::bootstrap::params::nameservers,
   $ntprestrict  = $::bootstrap::params::ntprestrict,
-  $selinux_mode = $::bootstrap::params::selinux_mode) {
+  $selinux_mode = $::bootstrap::params::selinux_mode) inherits bootstrap::params {
   include ::bootstrap::jkday
   include ::bootstrap::repos
   include ::tmux

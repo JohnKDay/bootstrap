@@ -35,7 +35,7 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
-class ::bootstrap::params {
+class bootstrap::params {
   $ntpservers   = [
     'ntp1.ntp.com',
     'ntp2.ntp.com']
