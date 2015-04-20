@@ -55,8 +55,7 @@ class bootstrap {
     mode => 'disabled',
   }
 
-  include ::systemd
-  
+
    systemctl {'firewalld':
     command => 'disable',
     }
