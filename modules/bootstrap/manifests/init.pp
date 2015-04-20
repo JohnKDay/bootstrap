@@ -36,7 +36,7 @@
 # Copyright 2011 Your name here, unless otherwise noted.
 #
 class bootstrap (
-  $ntpservers   = $::bootstrap::params::nameservers,
+  $ntpservers   = $::bootstrap::params::ntpservers,
   $ntprestrict  = $::bootstrap::params::ntprestrict,
   $selinux_mode = $::bootstrap::params::selinux_mode) inherits bootstrap::params {
   include ::bootstrap::jkday
