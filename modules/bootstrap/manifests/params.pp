@@ -36,7 +36,7 @@
 # Copyright 2011 Your name here, unless otherwise noted.
 #
 class bootstrap::params {
-  $packagelist  = [
+  $packagelist      = [
     'net-snmp-utils',
     'man-db',
     'man-pages',
@@ -49,9 +49,13 @@ class bootstrap::params {
     'sysstat',
     'bind-utils',
     'nmap-ncat']
-  $ntpservers   = [
+  $ntpservers       = [
     'ntp1.ntp.com',
     'ntp2.ntp.com']
-  $ntprestrict  = ['127.0.0.1']
-  $selinux_mode = 'disabled'
+  $ntprestrict      = ['127.0.0.1']
+  $selinux_mode     = 'disabled'
+  $sudo_purge       = false
+  $sudo_replace     = false
+  $firewalld_enable = false
+  $firewalld_ensure = 'stopped'
 }

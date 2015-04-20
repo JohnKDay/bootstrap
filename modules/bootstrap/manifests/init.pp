@@ -36,9 +36,13 @@
 # Copyright 2011 Your name here, unless otherwise noted.
 #
 class bootstrap (
-  $ntpservers   = $::bootstrap::params::ntpservers,
-  $ntprestrict  = $::bootstrap::params::ntprestrict,
-  $selinux_mode = $::bootstrap::params::selinux_mode) inherits ::bootstrap::params {
+  $ntpservers       = $::bootstrap::params::ntpservers,
+  $ntprestrict      = $::bootstrap::params::ntprestrict,
+  $sudo_purge       = $::bootstrap::params::sudo_purge,
+  $sudo_replace     = $::bootstrap::params::sudo_replace,
+  $firewalld_ensure = $::bootstrap::params::firewalld_ensure,
+  $firewalld_enable = $::bootstrap::params::firewalld_enable,
+  $selinux_mode     = $::bootstrap::params::selinux_mode) inherits ::bootstrap::params {
   include ::bootstrap::jkday
   include ::bootstrap::repos
   include ::bootstrap::packages
@@ -46,8 +50,8 @@ class bootstrap (
   include ::tmux
 
   class { 'sudo':
-    purge               => false,
-    config_file_replace => false,
+    purge               => $sudo_purge,
+    config_file_replace => $sudo_replace,
   }
 
   class { '::ntp':
@@ -60,8 +64,8 @@ class bootstrap (
   }
 
   service { 'firewalld':
-    ensure => 'stopped',
-    enable => false,
+    ensure => $firewalld_ensure,
+    enable => $firewalld_enable,
   }
 
 }
