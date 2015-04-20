@@ -37,7 +37,16 @@
 #
 class bootstrap::params {
   $packagelist  = [
-    'gcc',
+    'net-snmp-utils',
+    'man',
+    'man-pages',
+    'mailx',
+    'lsof',
+    'tmpwatch',
+    'wget',
+    'curl',
+    'tree',
+    'sysstat',
     'bind-utils',
     'nc']
   $ntpservers   = [
