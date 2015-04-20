@@ -39,6 +39,6 @@ class bootstrap::params {
   $ntpservers   = [
     'ntp1.ntp.com',
     'ntp2.ntp.com']
-  $ntprestrict  = '127.0.0.1'
+  $ntprestrict  = ['127.0.0.1']
   $selinux_mode = 'disabled'
 }
