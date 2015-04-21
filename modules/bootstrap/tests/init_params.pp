@@ -10,8 +10,9 @@
 #
 
 class { 'bootstrap':
-  ntpservers => [
-    'bob1.example.com',
-    'jeff1.example.com']
+  #  ntpservers => [
+  #    'bob1.example.com',
+  #    'jeff1.example.com']
+  timeregion => 'Asia',
+  timelocal  => 'Singapore'
 }
-
