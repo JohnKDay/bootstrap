@@ -76,6 +76,7 @@ class bootstrap::docker (
   file { '/usr/bin/docker':
     ensure  => 'present',
     source  => 'file:///var/staging/docker',
+    mode    => '0755',
     require => [
       Staging::File['docker'],
       Package['docker'],
