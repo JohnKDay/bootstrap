@@ -50,7 +50,7 @@ class bootstrap::docker (
 
   package { 'docker':
     ensure  => installed,
-    require => Yumrepo['docker'],
+    require => Yumrepo['extras'],
     notify  => File['/usr/bin/docker'],
   }
 
