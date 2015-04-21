@@ -55,4 +55,6 @@ class bootstrap::params {
   $sudo_replace     = false
   $firewalld_enable = false
   $firewalld_ensure = 'stopped'
+  $timeregion       = 'Americas'
+  $timelocal        = 'Los_Angeles'
 }

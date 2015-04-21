@@ -36,6 +36,8 @@
 # Copyright 2011 Your name here, unless otherwise noted.
 #
 class bootstrap (
+  $timeregion       = $::bootstrap::params::timeregion,
+  $timelocal        = $::bootstrap::params::timelocal,
   $ntpservers       = $::bootstrap::params::ntpservers,
   $ntprestrict      = $::bootstrap::params::ntprestrict,
   $sudo_purge       = $::bootstrap::params::sudo_purge,
@@ -56,6 +58,11 @@ class bootstrap (
   }
 
   include ::ntp
+
+  class { 'timezone':
+    region   => $timeregion,
+    locality => $timelocal,
+  }
 
   #  class { '::ntp':
   #    servers  => $ntpservers,
