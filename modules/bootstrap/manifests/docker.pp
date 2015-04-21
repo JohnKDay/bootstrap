@@ -1,4 +1,4 @@
-# == Class: bootstrap::jkday
+# == Class: bootstrap::docker
 #
 # Full description
 #
@@ -35,40 +35,50 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
-class bootstrap::jkday {
-  
-  $jkday_key = 'AAAAB3NzaC1yc2EAAAABJQAAAQEAjZ3KXggO4DFvP7tFbYm5v/s3+RCEganz4002txThzAtAQJ4dHIEI36X62GATO1RyPiJg9W5H398y7nXjGPdWDFXqKXACRdT4f6uAJX1vnySiX2lsnltYGDp1cjpRJl5yB7yvvrgGJaOOmoW9Th//zIlzpgklzgoOp/eAUGXgAs2OIMo0hK4TNgjJFJ3k+g5d7QSgiGKlyZm1/x7vR2PD055vkuzjDQ00Bj90ZFD3Gto52shdqZp2HYrBWR36Etpg7Vtcg3d3oO7LeAyU///OGVWLnTen6mpJaX+/QC23fhvN+XK/Zq/0yG+WFedFyVssj/NssB4xFi4OOx9yYgP/KQ=='
 
-  group { "unixusers":
-    ensure     => "present",
-    forcelocal => true,
-    gid        => '666',
+class bootstrap::docker (
+  $docker_source = 'https://get.docker.com/builds/Linux/x86_64/docker-latest',
+  $curl_option   = '--insecure') {
+  yumrepo { 'extras':
+    ensure     => 'present',
+    descr      => 'CentOS-$releasever - Extras',
+    gpgcheck   => '1',
+    enabled    => '1',
+    gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7',
+    mirrorlist => 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra',
   }
 
-  user { 'jkday':
-    ensure           => 'present',
-    gid              => '666',
-    home             => '/home/jkday',
-    password         => 'password',
-    password_max_age => '99999',
-    password_min_age => '0',
-    shell            => '/bin/bash',
-    uid              => '666',
-    forcelocal       => true,
-    managehome       => true,
+  package { 'docker':
+    ensure  => installed,
+    require => Yumrepo['docker'],
+    notify  => File['/usr/bin/docker'],
   }
 
-  sudo::conf { 'jkday':
-    priority => 10,
-    content  => "jkday ALL=(ALL) NOPASSWD: ALL",
+  file { '/var/staging': ensure => directory, }
+
+  class { 'staging':
+    path      => '/var/staging',
+    owner     => '0',
+    group     => '0',
+    exec_path => '/bin:/usr/bin',
   }
 
-  ssh_authorized_key { 'jkday':
-    ensure    => "present",
-    require => [ User["jkday"] ],
-    key => $jkday_key,
-    type => "ssh-rsa",
-    user => "jkday"
+  staging::file { '/var/staging/docker':
+    curl_option => '--insecure',
+    source      => $docker_source,
+    subdir      => '',
+    require     => [
+      File['/var/staging'],
+      Class['staging'],
+      ]
   }
 
+  file { '/usr/bin/docker':
+    ensure  => 'present',
+    source  => 'file:///var/staging/docker',
+    require => [
+      Staging::File['/var/staging/docker'],
+      Package['docker'],
+      ]
+  }
 }
