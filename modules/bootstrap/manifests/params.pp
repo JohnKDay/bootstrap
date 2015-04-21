@@ -38,9 +38,6 @@
 class bootstrap::params {
   $packagelist      = [
     'net-snmp-utils',
-    'man-db',
-    'man-pages',
-    'mailx',
     'lsof',
     'tmpwatch',
     'wget',
