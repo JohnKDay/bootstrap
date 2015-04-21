@@ -63,7 +63,7 @@ class bootstrap::docker (
     exec_path => '/bin:/usr/bin',
   }
 
-  staging::file { '/var/staging/docker':
+  staging::file { 'docker':
     curl_option => '--insecure',
     source      => $docker_source,
     subdir      => '',
