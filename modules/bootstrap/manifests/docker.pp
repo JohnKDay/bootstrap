@@ -77,7 +77,7 @@ class bootstrap::docker (
     ensure  => 'present',
     source  => 'file:///var/staging/docker',
     require => [
-      Staging::File['/var/staging/docker'],
+      Staging::File['docker'],
       Package['docker'],
       ]
   }
