@@ -54,10 +54,12 @@ class bootstrap (
     config_file_replace => $sudo_replace,
   }
 
-  class { '::ntp':
-    servers  => $ntpservers,
-    restrict => $ntprestrict,
-  }
+  include ::ntp
+
+  #  class { '::ntp':
+  #    servers  => $ntpservers,
+  #    restrict => $ntprestrict,
+  #  }
 
   class { '::selinux':
     mode => $selinux_mode,
