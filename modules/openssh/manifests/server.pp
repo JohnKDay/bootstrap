@@ -15,7 +15,7 @@ class openssh::server (
   $enable                 = $openssh::params::enable,
   $server_configfile      = $openssh::params::server_configfile,
   $service_name           = $openssh::params::service_name,
-  $loglevel               = $openssh::params::loglevel,
+  $sshd_loglevel               = $openssh::params::sshd_loglevel,
   $port                   = $openssh::params::port,
   $protocol               = $openssh::params::protocol,
   $permitrootlogin        = $openssh::params::permitrootlogin,

@@ -14,7 +14,7 @@ class openssh::params {
   $enable = true
   $ensure = 'running'
   $banner = 'none'
-  $loglevel = 'info'
+  $sshd_loglevel = 'info'
   $port = '22'
   $protocol = '2'
   $permitrootlogin = 'without-password'
