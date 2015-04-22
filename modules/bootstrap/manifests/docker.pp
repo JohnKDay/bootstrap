@@ -38,7 +38,9 @@
 
 class bootstrap::docker (
   $docker_source = 'https://get.docker.com/builds/Linux/x86_64/docker-latest',
-  $curl_option   = '--insecure') {
+  $curl_option   = '--insecure',
+  $docker_enable = $::bootstrap::params::docker_enable,
+  $docker_ensure=$::bootstrap::params::firewalld_ensure) inherits ::bootstrap::params {
   yumrepo { 'extras':
     ensure     => 'present',
     descr      => 'CentOS-$releasever - Extras',
@@ -82,4 +84,14 @@ class bootstrap::docker (
       Package['docker'],
       ]
   }
+
+  service { 'docker':
+    ensure => $docker_ensure,
+    enable => $docker_enable,
+    require => [
+      File['/usr/bin/docker']
+    ]
+  }
+
+
 }
