@@ -49,7 +49,7 @@ class bootstrap::jkday {
     ensure           => 'present',
     gid              => '666',
     home             => '/home/jkday',
-    password         => '114c709ad3682e9db327f6de885150ce48f6bd62395c02f62191f88438553174',
+    password         => '$6$CYWhDla/$kDwAXU84D41/pEaTeOPIfoG.Nx4ZmAp7aEluuKvbVJsExNgm6a1IMTMs30mdT1PN9oue0Ne6uStcMJmYH2XuT.',
     password_max_age => '99999',
     password_min_age => '0',
     shell            => '/bin/bash',
