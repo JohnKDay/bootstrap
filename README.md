@@ -25,5 +25,3 @@ Bootstrap is simply run by issuing the following command:
 $ curl -s -k https://myserver.extreme-limit.com/jkday/bootstrap/raw/master/bootbootstrap.sh | bash
 ```
 Reboot and the machine is ready to go with docker.
-
-Reboot and the machine is ready to go with docker.
