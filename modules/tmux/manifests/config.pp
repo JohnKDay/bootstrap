@@ -17,7 +17,7 @@ class tmux::config (
   
   file { '/etc/tmux.conf':
     ensure => 'present',
-    mode   => '640',
+    mode   => '644',
     owner  => 'root',
     group  => 'root',
     content => template( "tmux/tmux.conf" ),
