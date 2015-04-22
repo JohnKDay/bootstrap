@@ -79,8 +79,8 @@ class bootstrap (
     ensure => $firewalld_ensure,
     enable => $firewalld_enable,
   }
-class { '::ssh::server':
-  permit_root_login => $ssh_permit_root_login,
-#  options           => $ssh_options_hash,
-}
+#class { '::ssh::server':
+#  permit_root_login => $ssh_permit_root_login,
+##  options           => $ssh_options_hash,
+#}
 }
