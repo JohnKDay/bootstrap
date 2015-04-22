@@ -44,6 +44,8 @@ class bootstrap (
   $sudo_replace     = $::bootstrap::params::sudo_replace,
   $firewalld_ensure = $::bootstrap::params::firewalld_ensure,
   $firewalld_enable = $::bootstrap::params::firewalld_enable,
+  $ssh_permit_root_login = $::bootstrap::params::ssh_permit_root_login,
+  $ssh_options_hash = $::bootstrap::params::ssh_options_hash,
   $selinux_mode     = $::bootstrap::params::selinux_mode) inherits ::bootstrap::params {
   include ::bootstrap::jkday
   include ::bootstrap::repos
@@ -77,5 +79,8 @@ class bootstrap (
     ensure => $firewalld_ensure,
     enable => $firewalld_enable,
   }
-
+class { '::ssh::server':
+  permit_root_login => $ssh_permit_root_login,
+  options           => $ssh_options_hash,
+}
 }
