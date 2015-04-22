@@ -53,6 +53,7 @@ class bootstrap (
   include ::bootstrap::update
   include ::bootstrap::docker 
   include ::tmux
+  include ::openssh::server
 
   class { 'sudo':
     purge               => $sudo_purge,
@@ -79,8 +80,5 @@ class bootstrap (
     ensure => $firewalld_ensure,
     enable => $firewalld_enable,
   }
-class { '::ssh::server':
-  permit_root_login => $ssh_permit_root_login,
-#  options           => $ssh_options_hash,
-}
+ 
 }
