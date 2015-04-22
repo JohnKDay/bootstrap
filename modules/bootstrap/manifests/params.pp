@@ -59,8 +59,6 @@ class bootstrap::params {
   $docker_ensure = 'running'
   $timeregion       = 'America'
   $timelocal        = 'Los_Angeles'
-$ssh_permit_root_login = 'without-password'
-  $ssh_options_hash=[
-    ''
-  ]
+  $ssh_permit_root_login = 'without-password'
+  $ssh_options_hash=[]
 }
