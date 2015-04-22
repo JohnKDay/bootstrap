@@ -81,6 +81,6 @@ class bootstrap (
   }
 class { '::ssh::server':
   permit_root_login => $ssh_permit_root_login,
-  options           => $ssh_options_hash,
+#  options           => $ssh_options_hash,
 }
 }
