@@ -49,7 +49,7 @@ class bootstrap (
   include ::bootstrap::repos
   include ::bootstrap::packages
   include ::bootstrap::update
-  include ::bootstrap::docker
+  include ::bootstrap::docker 
   include ::tmux
 
   class { 'sudo':
