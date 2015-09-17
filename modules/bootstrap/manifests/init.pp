@@ -51,7 +51,8 @@ class bootstrap (
   include ::bootstrap::repos
   include ::bootstrap::packages
   include ::bootstrap::update
-  include ::bootstrap::docker 
+  include ::bootstrap::docker
+  include ::bootstrap::docker-machine
   include ::tmux
   include ::openssh::server
 
@@ -80,5 +81,5 @@ class bootstrap (
     ensure => $firewalld_ensure,
     enable => $firewalld_enable,
   }
- 
+
 }
