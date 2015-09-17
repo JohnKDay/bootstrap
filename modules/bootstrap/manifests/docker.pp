@@ -37,7 +37,7 @@
 #
 
 class bootstrap::docker (
-  $docker_source = 'https://get.docker.com/builds/Linux/x86_64/docker-latest',
+  $docker_source = 'https://experimental.docker.com/builds/Linux/x86_64/docker-latest',
   $curl_option   = '--insecure',
   $docker_enable = $::bootstrap::params::docker_enable,
   $docker_ensure=$::bootstrap::params::docker_ensure) inherits ::bootstrap::params {
