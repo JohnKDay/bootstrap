@@ -46,9 +46,7 @@ class bootstrap::params {
     'sysstat',
     'bind-utils',
     'nmap-ncat']
-  $ntpservers       = [
-    'ntp1.ntp.com',
-    'ntp2.ntp.com']
+  $ntpservers       = ['ntp.hp.net']
   $ntprestrict      = ['127.0.0.1']
   $selinux_mode     = 'disabled'
   $sudo_purge       = false
@@ -59,6 +57,6 @@ class bootstrap::params {
   $docker_ensure = 'running'
   $timeregion       = 'America'
   $timelocal        = 'Los_Angeles'
-  $ssh_permit_root_login = 'without-password'
+  $ssh_permit_root_login = 'yes'
   $ssh_options_hash=[]
 }
