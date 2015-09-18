@@ -52,7 +52,6 @@ class bootstrap (
   include ::bootstrap::packages
   include ::bootstrap::update
   include ::bootstrap::docker
-  include ::bootstrap::docker-machine
   include ::tmux
   include ::openssh::server
 
@@ -61,17 +60,17 @@ class bootstrap (
     config_file_replace => $sudo_replace,
   }
 
-  include ::ntp
+  #include ::ntp
 
   class { 'timezone':
     region   => $timeregion,
     locality => $timelocal,
   }
 
-  #  class { '::ntp':
-  #    servers  => $ntpservers,
-  #    restrict => $ntprestrict,
-  #  }
+  class { '::ntp':
+    servers  => $ntpservers,
+    restrict => $ntprestrict,
+  }
 
   class { '::selinux':
     mode => $selinux_mode,
