@@ -8,7 +8,7 @@
 #
 # [*sample_parameter*]
 #   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+#   e.g. 'Specify one or more upstream ntp servers as an array.'
 #
 # === Variables
 #
@@ -38,60 +38,102 @@
 
 class bootstrap::docker (
   $docker_source = 'https://experimental.docker.com/builds/Linux/x86_64/docker-latest',
+  $docker_compose_source = 'https://github.com/docker/compose/releases/download/1.4.1/docker-compose-Linux-x86_64',
+  $docker_machine_source = 'https://github.com/docker/machine/releases/download/v0.4.0/docker-machine_linux-amd64',
   $curl_option   = '--insecure',
   $docker_enable = $::bootstrap::params::docker_enable,
   $docker_ensure=$::bootstrap::params::docker_ensure) inherits ::bootstrap::params {
-  yumrepo { 'extras':
-    ensure     => 'present',
-    descr      => 'CentOS-$releasever - Extras',
-    gpgcheck   => '1',
-    enabled    => '1',
-    gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7',
-    mirrorlist => 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra',
-  }
+    yumrepo { 'extras':
+      ensure     => 'present',
+      descr      => 'CentOS-$releasever - Extras',
+      gpgcheck   => '1',
+      enabled    => '1',
+      gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7',
+      mirrorlist => 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra',
+    }
 
-  package { 'docker':
-    ensure  => installed,
-    require => Yumrepo['extras'],
-    notify  => File['/usr/bin/docker'],
-  }
+    package { 'docker':
+      ensure  => installed,
+      require => Yumrepo['extras'],
+      notify  => File['/usr/bin/docker'],
+    }
 
-  file { '/var/staging': ensure => directory, }
+    file { '/var/staging': ensure => directory, }
 
-  class { 'staging':
-    path      => '/var/staging',
-    owner     => '0',
-    group     => '0',
-    exec_path => '/bin:/usr/bin',
-  }
+    class { 'staging':
+      path      => '/var/staging',
+      owner     => '0',
+      group     => '0',
+      exec_path => '/bin:/usr/bin',
+    }
 
-  staging::file { 'docker':
-    curl_option => '--insecure',
-    source      => $docker_source,
-    subdir      => '',
-    require     => [
-      File['/var/staging'],
-      Class['staging'],
+    staging::file { 'docker':
+      curl_option => '--insecure',
+      source      => $docker_source,
+      subdir      => '',
+      require     => [
+        File['/var/staging'],
+        Class['staging'],
       ]
-  }
+    }
 
-  file { '/usr/bin/docker':
-    ensure  => 'present',
-    source  => 'file:///var/staging/docker',
-    mode    => '0755',
-    require => [
-      Staging::File['docker'],
-      Package['docker'],
+    staging::file { 'docker-machine':
+      curl_option => '--insecure',
+      source      => $docker_machine_source,
+      subdir      => '',
+      require     => [
+        File['/var/staging'],
+        Class['staging'],
       ]
+    }
+
+    staging::file { 'docker-compose':
+      curl_option => '--insecure',
+      source      => $docker_compose_source,
+      subdir      => '',
+      require     => [
+        File['/var/staging'],
+        Class['staging'],
+      ]
+    }
+
+    file { '/usr/bin/docker-machine':
+      ensure  => 'present',
+      source  => 'file:///var/staging/docker-machine',
+      mode    => '0755',
+      require => [
+        Staging::File['docker-machine'],
+        Package['docker'],
+      ]
+    }
+
+    file { '/usr/bin/docker-compose':
+      ensure  => 'present',
+      source  => 'file:///var/staging/docker-compose',
+      mode    => '0755',
+      require => [
+        Staging::File['docker-compose'],
+        Package['docker'],
+      ]
+    }
+
+    file { '/usr/bin/docker':
+      ensure  => 'present',
+      source  => 'file:///var/staging/docker',
+      mode    => '0755',
+      require => [
+        Staging::File['docker'],
+        Package['docker'],
+      ]
+    }
+
+    service { 'docker':
+      ensure  => $docker_ensure,
+      enable  => $docker_enable,
+      require => [
+        File['/usr/bin/docker']
+      ]
+    }
+
+
   }
-
-  service { 'docker':
-    ensure => $docker_ensure,
-    enable => $docker_enable,
-    require => [
-      File['/usr/bin/docker']
-    ]
-  }
-
-
-}
