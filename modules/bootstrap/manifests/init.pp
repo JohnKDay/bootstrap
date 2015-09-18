@@ -53,7 +53,7 @@ class bootstrap (
   include ::bootstrap::update
   include ::bootstrap::docker
   include ::tmux
-  include ::openssh::server
+#  include ::openssh::server
 
   class { 'sudo':
     purge               => $sudo_purge,
@@ -61,6 +61,10 @@ class bootstrap (
   }
 
   #include ::ntp
+
+  class { '::openssh::server':
+   permitrootlogin => $ssh_permit_root_login,
+  }
 
   class { 'timezone':
     region   => $timeregion,
