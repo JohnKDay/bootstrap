@@ -47,7 +47,7 @@ class bootstrap (
   $ssh_permit_root_login = $::bootstrap::params::ssh_permit_root_login,
   $ssh_options_hash = $::bootstrap::params::ssh_options_hash,
   $selinux_mode     = $::bootstrap::params::selinux_mode) inherits ::bootstrap::params {
-#  include ::bootstrap::jkday
+  include ::bootstrap::root
   include ::bootstrap::repos
   include ::bootstrap::packages
   include ::bootstrap::update
